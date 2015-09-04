@@ -1,0 +1,72 @@
+<ion-pane>
+	<ion-header-bar class="panel-header-1 marginTop40">
+		<div class="logo">
+			<img src="img/logo_header.png"/>
+		</div>
+
+		<div class="title-bar">
+			<div class="back" ui-sref="menu">Back</div>
+			Create New Walk
+		</div>
+	</ion-header-bar>
+
+	<ion-content scroll="false">
+		<div class="panel-create-walk">
+				<h1> {{ walkDate | moment:'DD'}} <span class="yellow-color">{{ walkDate | moment:' MMM YY'}}</h1> 
+		</div>
+
+		<div class="panel-week-selector">
+			<div>
+				<div ng-click="setThisWeek()"><a>Prev</a></div>
+				<div>{{calTitle}}</div>
+				<div  ng-click="setNextWeek()"><a>Next</a></div>
+			</div>
+		</div>
+
+		<div class="panel-week">
+			<div>Su</div>
+			<div>Mo</div>
+			<div>Tu</div>
+			<div>We</div>
+			<div>Th</div>
+			<div>Fr</div>
+			<div>Sa</div>
+		</div>
+
+		<div id="dayPanel" class="panel-days">			
+			<div ng-repeat="dayInfo in weekCurrent" ng-click="selectDate(dayInfo)">
+				<span  ng-class= "setClass({{dayInfo.day}}, {{dayInfo.isInUse}}, dayInfo)">{{dayInfo.day}}</span>
+			</div>			
+			
+		</div>
+<!--
+		<div id="dayPanel" class="panel-days" ng-if="!isFirstWeek">			
+
+			<div ng-repeat ="day in weekTwo" ng-click="selectDate({{day}})"><span  ng-class= "setClass({{day}})">{{day}}</span></div>
+			
+		</div>
+-->
+
+	</ion-content>
+
+	<ion-footer-bar>
+
+		<div class="panel-create-new-footer">
+			<div class="panel-time">
+				<div>
+					<button class="button btn-time" ng-click="increaseHour()">{{hour}}</button>
+					<span class="dots">:</span>
+					<button class=" button btn-time" ng-click="increaseMinutes()">{{minutes}}</button>
+					<button class="button btn-am" ng-click="change()">{{am}}</button>
+				</div>
+			</div>
+			<div class="form-content">
+				<button class="button-big-yellow" ng-click="createWalk()">Create &amp; invite</button>
+			</div>
+		</div>
+	</ion-footer-bar>
+
+</ion-pane>
+
+
+

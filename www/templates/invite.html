@@ -1,0 +1,51 @@
+<ion-pane on-swipe-right="onSwipeRight()">
+
+    <ion-header-bar class="panel-header-1 marginTop40">
+        <div class="logo">
+            <img src="img/logo_header.png"/>
+        </div>
+
+        <div class="title-bar">
+            <!-- <div class="back">Back</div> -->
+            Create New Walk
+            <div class="action" ng-click="deleteWalk()">Delete</div>
+        </div>
+    </ion-header-bar>
+
+    <ion-content class="create-walk-footer-space">
+        <div class="panel-date-created" >
+            <div>
+                <label>
+                    <span class="icon"><img src="img/icon_calendar_48.png"/></span>
+                    <h1>{{walkDate}}</h1>
+                </label>
+                <label>
+                    <span class="icon"><img src="img/icon_clock_48.png"/></span>
+                    <h1>{{walkTime}}</h1>
+                </label>
+            </div>
+        </div>
+
+        <div class="panel-single-row paddingBottom10">
+            <label class="font11 yellow-color">Invite Friends</label>
+        </div>
+
+        <div class="panel-invite-list" data-ng-repeat="invities in myInvities" data-ng-if="!isFirstTime()">
+            <img ng-src="img/{{invities.profilePicture}}">
+            <h2>{{invities.nickName}}</h2>
+            <button ng-if="invities.isInvited == null" ng-click="invite('{{invities.id}}')">Invite</button>
+            <button ng-if="invities.isInvited != null" ng-class="getClass(invities.status)">{{ invities.status == 1 ? 'Accepted' : (invities.status == 2 ? 'Maybe' : (invities.status == 3 ? 'Declined' : 'Invited') )  }}</button>
+        </div>
+
+       
+    </ion-content>
+
+    <ion-footer-bar>
+        <div class="panel-create-new-footer no-color">
+            <div class="form-content">
+                <button class="button-big-yellow" ui-sref="menu">Done</button>
+            </div>
+        </div>
+    </ion-footer-bar>
+
+</ion-pane>

@@ -1,0 +1,61 @@
+<ion-pane  on-swipe-right="onSwipeRight()" >
+
+
+	<ion-header-bar class="panel-header-1 marginTop40">
+		<div class="logo">
+			<img src="img/logo_header.png"/>
+		</div>
+
+		<div class="title-bar">
+			<div class="back" ui-sref="menu">Back</div>
+			Join a Walk
+		</div>
+	</ion-header-bar>
+
+	<ion-content>
+		
+		<div class="panel-join-a-walk-list"  data-ng-repeat="invitation in invites" data-ng-if="!isFirstTime()" ng-click="showWalk(invitation.walkId, invitation.inviterId, invitation.dateOfWalk)">
+			<label class="title">{{ invitation.inviterId == $root.userId ? 'My walk' : invitation.inviterName}} </label>
+			<div>
+				<label>
+					<span class="icon"><img src="img/icon_calendar_48_blue.png"/></span>
+					<h1>{{ invitation.dateOfWalk | moment:'ddd D, MMM YYYY'}} </h1>
+				</label>
+				<label>
+					<span class="icon"><img src="img/icon_clock_48_blue.png"/></span>
+					<h1>{{invitation.dateOfWalk | moment:'hh:mm a'}}</h1>
+				</label>
+				<label class="status-update" ng-if="invitation.status != 0" >
+					<span class="icon"><img ng-src="img/icon-{{ invitation.status == 1 ? 'accepted': 'maybe' }}.png"/></span>
+					<h2>{{ invitation.status == 1 ? 'Accepted': 'Maybe'}}</h2>
+				</label>
+
+<!--				<label class="status-update">
+					<span class="icon"><img src="img/icon-maybe.png"/></span>
+					<h2>Maybe</h2>
+				</label>-->
+			</div>
+
+			<div class="panel-single-row-full marginTop18">
+				<label>People Walking with me</label>
+			</div>
+
+			<div class="image-list">
+				<div data-ng-repeat="participant in invitation.participants">
+				 <img ng-src="img/{{participant.profilePicture}}">
+				</div>
+			</div>
+
+			<div class="status" ng-if="invitation.inviterId != $root.userId">
+				<button ng-if="invitation.status != 1" data-ng-click="changeStatus(invitation.walkId,1)" class="accept">Accept</button>
+				<button ng-if="invitation.status != 2" data-ng-click="changeStatus(invitation.walkId,2)" class="maybe">May be</button>
+				<button ng-if="invitation.status != 3" data-ng-click="changeStatus(invitation.walkId,3)" class="decline">Decline</button>
+
+			</div>
+
+		</div>
+
+		
+	</ion-content>
+
+</ion-pane>
